@@ -1,23 +1,45 @@
 'use strict';
 
+var myProfile = {
+  hello: 'Hello, world!',
+  name: "I'm Phan Huy Hoang",
+  skill: ['HTML', 'CSS', 'Javascript']
+};
+
 var template = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Hello, world!'
+    myProfile.hello
+  ),
+  myProfile.name && React.createElement(
+    'p',
+    null,
+    myProfile.name
   ),
   React.createElement(
     'p',
     null,
-    'I\'m Phan Huy Ho\xE0ng'
+    myProfile.skill.length > 0 ? 'Here are your skills' : 'No skills'
+  ),
+  myProfile.skill && React.createElement(
+    'ol',
+    null,
+    myProfile.skill.map(function (item, index) {
+      return React.createElement(
+        'li',
+        { key: index },
+        item
+      );
+    })
   )
 );
 
 var user = {
   name: 'Huy Hoang Phan',
-  age: 27,
+  age: 26,
   location: 'Binh Dinh'
 };
 
@@ -27,9 +49,9 @@ var templateTwo = React.createElement(
   React.createElement(
     'h1',
     null,
-    user.name
+    user.name ? user.name : 'Anonymous'
   ),
-  React.createElement(
+  user.age && user.age > 18 && React.createElement(
     'p',
     null,
     'Age: ',
@@ -38,10 +60,9 @@ var templateTwo = React.createElement(
   React.createElement(
     'p',
     null,
-    'Location: ',
-    user.location
+    'user.location'
   )
 );
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
