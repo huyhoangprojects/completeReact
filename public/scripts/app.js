@@ -37,32 +37,41 @@ var template = React.createElement(
   )
 );
 
-var user = {
-  name: 'Huy Hoang Phan',
-  age: 26,
-  location: 'Binh Dinh'
+var count = 0;
+var addOne = function addOne() {
+  return console.log('add One');
 };
-
+var minusOne = function minusOne() {
+  return console.log('minus One');
+};
+var reset = function reset() {
+  return console.log('reset');
+};
 var templateTwo = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    user.name ? user.name : 'Anonymous'
-  ),
-  user.age && user.age > 18 && React.createElement(
-    'p',
-    null,
-    'Age: ',
-    user.age
+    'Count ',
+    count
   ),
   React.createElement(
-    'p',
-    null,
-    'user.location'
+    'button',
+    { onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: minusOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: reset },
+    'reset'
   )
 );
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
