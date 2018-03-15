@@ -4,46 +4,48 @@ const myProfile = {
   skill: ['HTML', 'CSS', 'Javascript']
 }
 
-const template = (
-  <div>
-    <h1>{myProfile.hello}</h1>
-    {myProfile.name &&  <p>{myProfile.name}</p>}
-    <p>{(myProfile.skill.length > 0) ? 'Here are your skills' : 'No skills' }</p>
-    {
-      myProfile.skill &&
-      <ol>
-        {myProfile.skill.map((item,index)=>{
-          return <li key={index}>{item}</li>
-        })}
-      </ol>
-    }
-  </div>
-);
+const onFormSubmit = (e) => {
+  e.preventDefault();
 
-let count = 0;
-const addOne = () => {
-  count++;
-  renderApp();
-};
-const minusOne = () => {
-  count--;
-  renderApp();
-};
-const reset = () => {
-  count = 0;
-  renderApp();
+  const skill = e.target.elements.skill.value;
+
+  if (skill) {
+    e.target.elements.skill.value = '';
+    myProfile.skill.push(skill);
+    renderApp();
+  }
 };
 
+const onRemoveAll = () => {
+  myProfile.skill = [];
+  renderApp();
+};
 const appRoot = document.getElementById('root');
+
+
 const renderApp = () => {
-  const templateTwo = (
+  const template = (
     <div>
-      <h1>Count {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>reset</button>
+      <h1>{myProfile.hello}</h1>
+      {myProfile.name &&  <p>{myProfile.name}</p>}
+      <p>{(myProfile.skill.length > 0) ? 'Here are your skills' : 'No skills' }</p>
+      {
+        myProfile.skill &&
+        <ol>
+          {myProfile.skill.map((item,index)=>{
+            return <li key={index}>{item}</li>
+          })}
+        </ol>
+      }
+      <button onClick={onRemoveAll}>Remove all skill</button>
+      <p> </p>
+      <form onSubmit={onFormSubmit}>
+      <input type="text" name="skill" />
+      <button>Add skill</button>
+      </form>
     </div>
   );
-  ReactDOM.render(templateTwo, appRoot);
-}
+
+  ReactDOM.render(template, appRoot);
+};
 renderApp();

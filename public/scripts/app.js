@@ -6,78 +6,76 @@ var myProfile = {
   skill: ['HTML', 'CSS', 'Javascript']
 };
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    myProfile.hello
-  ),
-  myProfile.name && React.createElement(
-    'p',
-    null,
-    myProfile.name
-  ),
-  React.createElement(
-    'p',
-    null,
-    myProfile.skill.length > 0 ? 'Here are your skills' : 'No skills'
-  ),
-  myProfile.skill && React.createElement(
-    'ol',
-    null,
-    myProfile.skill.map(function (item, index) {
-      return React.createElement(
-        'li',
-        { key: index },
-        item
-      );
-    })
-  )
-);
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
 
-var count = 0;
-var addOne = function addOne() {
-  count++;
-  renderApp();
-};
-var minusOne = function minusOne() {
-  count--;
-  renderApp();
-};
-var reset = function reset() {
-  count = 0;
-  renderApp();
+  var skill = e.target.elements.skill.value;
+
+  if (skill) {
+    e.target.elements.skill.value = '';
+    myProfile.skill.push(skill);
+    renderApp();
+  }
 };
 
+var onRemoveAll = function onRemoveAll() {
+  myProfile.skill = [];
+  renderApp();
+};
 var appRoot = document.getElementById('root');
+
 var renderApp = function renderApp() {
-  var templateTwo = React.createElement(
+  var template = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count ',
-      count
+      myProfile.hello
+    ),
+    myProfile.name && React.createElement(
+      'p',
+      null,
+      myProfile.name
+    ),
+    React.createElement(
+      'p',
+      null,
+      myProfile.skill.length > 0 ? 'Here are your skills' : 'No skills'
+    ),
+    myProfile.skill && React.createElement(
+      'ol',
+      null,
+      myProfile.skill.map(function (item, index) {
+        return React.createElement(
+          'li',
+          { key: index },
+          item
+        );
+      })
     ),
     React.createElement(
       'button',
-      { onClick: addOne },
-      '+1'
+      { onClick: onRemoveAll },
+      'Remove all skill'
     ),
     React.createElement(
-      'button',
-      { onClick: minusOne },
-      '-1'
+      'p',
+      null,
+      ' '
     ),
     React.createElement(
-      'button',
-      { onClick: reset },
-      'reset'
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'skill' }),
+      React.createElement(
+        'button',
+        null,
+        'Add skill'
+      )
     )
   );
-  ReactDOM.render(templateTwo, appRoot);
+
+  ReactDOM.render(template, appRoot);
 };
 renderApp();
