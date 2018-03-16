@@ -24,6 +24,17 @@ class Skills extends React.Component {
     return (
       <div>
         My skills
+        <Skill />
+      </div>
+    )
+  }
+}
+
+class Skill extends React.Component {
+  render() {
+    return (
+      <div>
+        skill
       </div>
     )
   }

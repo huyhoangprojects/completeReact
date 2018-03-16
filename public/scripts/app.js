@@ -82,7 +82,8 @@ var Skills = function (_React$Component3) {
       return React.createElement(
         'div',
         null,
-        'My skills'
+        'My skills',
+        React.createElement(Skill, null)
       );
     }
   }]);
@@ -90,8 +91,31 @@ var Skills = function (_React$Component3) {
   return Skills;
 }(React.Component);
 
-var AddSkill = function (_React$Component4) {
-  _inherits(AddSkill, _React$Component4);
+var Skill = function (_React$Component4) {
+  _inherits(Skill, _React$Component4);
+
+  function Skill() {
+    _classCallCheck(this, Skill);
+
+    return _possibleConstructorReturn(this, (Skill.__proto__ || Object.getPrototypeOf(Skill)).apply(this, arguments));
+  }
+
+  _createClass(Skill, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'skill'
+      );
+    }
+  }]);
+
+  return Skill;
+}(React.Component);
+
+var AddSkill = function (_React$Component5) {
+  _inherits(AddSkill, _React$Component5);
 
   function AddSkill() {
     _classCallCheck(this, AddSkill);
