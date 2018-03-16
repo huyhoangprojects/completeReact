@@ -29,9 +29,16 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handlePick = this.handlePick.bind(this);
+  }
+
   handlePick() {
     alert('Pick one!');
   }
+
   render() {
     return (
       <div>
@@ -42,9 +49,16 @@ class Action extends React.Component {
 }
 
 class Skills extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
   handleRemove() {
     alert('Remove all!');
   }
+
   render() {
     return (
       <div>
@@ -70,6 +84,11 @@ class Skill extends React.Component {
 }
 
 class AddSkill extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleAdd = this.handleAdd.bind(this);
+  }
   handleAdd(e) {
     e.preventDefault();
     const skill = e.target.elements.skill.value;

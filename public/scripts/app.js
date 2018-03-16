@@ -74,10 +74,13 @@ var Header = function (_React$Component2) {
 var Action = function (_React$Component3) {
   _inherits(Action, _React$Component3);
 
-  function Action() {
+  function Action(props) {
     _classCallCheck(this, Action);
 
-    return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
+    var _this3 = _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).call(this, props));
+
+    _this3.handlePick = _this3.handlePick.bind(_this3);
+    return _this3;
   }
 
   _createClass(Action, [{
@@ -106,10 +109,13 @@ var Action = function (_React$Component3) {
 var Skills = function (_React$Component4) {
   _inherits(Skills, _React$Component4);
 
-  function Skills() {
+  function Skills(props) {
     _classCallCheck(this, Skills);
 
-    return _possibleConstructorReturn(this, (Skills.__proto__ || Object.getPrototypeOf(Skills)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (Skills.__proto__ || Object.getPrototypeOf(Skills)).call(this, props));
+
+    _this4.handleRemove = _this4.handleRemove.bind(_this4);
+    return _this4;
   }
 
   _createClass(Skills, [{
@@ -168,10 +174,13 @@ var Skill = function (_React$Component5) {
 var AddSkill = function (_React$Component6) {
   _inherits(AddSkill, _React$Component6);
 
-  function AddSkill() {
+  function AddSkill(props) {
     _classCallCheck(this, AddSkill);
 
-    return _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).apply(this, arguments));
+    var _this6 = _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).call(this, props));
+
+    _this6.handleAdd = _this6.handleAdd.bind(_this6);
+    return _this6;
   }
 
   _createClass(AddSkill, [{
