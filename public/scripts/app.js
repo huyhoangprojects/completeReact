@@ -81,6 +81,11 @@ var Action = function (_React$Component3) {
   }
 
   _createClass(Action, [{
+    key: 'handlePick',
+    value: function handlePick() {
+      alert('Pick one!');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -88,7 +93,7 @@ var Action = function (_React$Component3) {
         null,
         React.createElement(
           'button',
-          null,
+          { onClick: this.handlePick },
           'What is my best skill?'
         )
       );
@@ -108,11 +113,21 @@ var Skills = function (_React$Component4) {
   }
 
   _createClass(Skills, [{
+    key: 'handleRemove',
+    value: function handleRemove() {
+      alert('Remove all!');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
+        React.createElement(
+          'button',
+          { onClick: this.handleRemove },
+          'Remove All'
+        ),
         React.createElement(
           'ol',
           null,
@@ -160,12 +175,32 @@ var AddSkill = function (_React$Component6) {
   }
 
   _createClass(AddSkill, [{
+    key: 'handleAdd',
+    value: function handleAdd(e) {
+      e.preventDefault();
+      var skill = e.target.elements.skill.value;
+
+      if (skill) {
+        alert(skill);
+        e.target.elements.skill.value = '';
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
-        'Add skill'
+        React.createElement(
+          'form',
+          { onSubmit: this.handleAdd },
+          React.createElement('input', { type: 'text', name: 'skill' }),
+          React.createElement(
+            'button',
+            null,
+            'Add skill'
+          )
+        )
       );
     }
   }]);

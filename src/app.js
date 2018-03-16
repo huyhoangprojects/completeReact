@@ -29,19 +29,26 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+  handlePick() {
+    alert('Pick one!');
+  }
   render() {
     return (
       <div>
-        <button>What is my best skill?</button>
+        <button onClick={this.handlePick}>What is my best skill?</button>
       </div>
     )
   }
 }
 
 class Skills extends React.Component {
+  handleRemove() {
+    alert('Remove all!');
+  }
   render() {
     return (
       <div>
+        <button onClick={this.handleRemove}>Remove All</button>
         <ol>
           {
             this.props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
@@ -63,10 +70,22 @@ class Skill extends React.Component {
 }
 
 class AddSkill extends React.Component {
+  handleAdd(e) {
+    e.preventDefault();
+    const skill = e.target.elements.skill.value;
+
+    if(skill) {
+      alert(skill);
+      e.target.elements.skill.value = '';
+    }
+  }
   render() {
     return (
       <div>
-        Add skill
+        <form onSubmit={this.handleAdd}>
+          <input type="text" name="skill" />
+          <button>Add skill</button>
+        </form>
       </div>
     )
   }
