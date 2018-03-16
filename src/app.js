@@ -1,30 +1,8 @@
-const myProfile = {
-  hello: 'Hello, world!',
-  name: "I'm Phan Huy Hoang",
-  skill: ['HTML', 'CSS', 'Javascript']
-}
+let visibility = false;
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-
-  const skill = e.target.elements.skill.value;
-
-  if (skill) {
-    e.target.elements.skill.value = '';
-    myProfile.skill.push(skill);
-    renderApp();
-  }
-};
-
-const onRemoveAll = () => {
-  myProfile.skill = [];
+const onToggle = () => {
+  visibility = !visibility;
   renderApp();
-};
-
-const myBestSkill = () => {
-  const randomSkill = Math.floor(Math.random() * myProfile.skill.length);
-  const bestSkill = myProfile.skill[randomSkill];
-  alert(bestSkill);
 }
 
 const appRoot = document.getElementById('root');
@@ -33,23 +11,12 @@ const appRoot = document.getElementById('root');
 const renderApp = () => {
   const template = (
     <div>
-      <h1>{myProfile.hello}</h1>
-      {myProfile.name &&  <p>{myProfile.name}</p>}
-      <p>{(myProfile.skill.length > 0) ? 'Here are your skills' : 'No skills' }</p>
+      <h1>Visibility toggle</h1>
+      <button onClick={onToggle}>{visibility ? 'Hide details' : 'Show details'}</button>
       {
-        myProfile.skill &&
-        <ol>
-          {myProfile.skill.map((item,index)=>{
-            return <li key={index}>{item}</li>
-          })}
-        </ol>
+        visibility &&
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
       }
-      <button disabled={myProfile.skill.length===0} onClick={myBestSkill}>What is my best skill?</button><button onClick={onRemoveAll}>Remove all skill</button>
-      <p> </p>
-      <form onSubmit={onFormSubmit}>
-      <input type="text" name="skill" />
-      <button>Add skill</button>
-      </form>
     </div>
   );
 

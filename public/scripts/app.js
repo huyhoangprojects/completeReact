@@ -1,32 +1,10 @@
 'use strict';
 
-var myProfile = {
-  hello: 'Hello, world!',
-  name: "I'm Phan Huy Hoang",
-  skill: ['HTML', 'CSS', 'Javascript']
-};
+var visibility = false;
 
-var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault();
-
-  var skill = e.target.elements.skill.value;
-
-  if (skill) {
-    e.target.elements.skill.value = '';
-    myProfile.skill.push(skill);
-    renderApp();
-  }
-};
-
-var onRemoveAll = function onRemoveAll() {
-  myProfile.skill = [];
+var onToggle = function onToggle() {
+  visibility = !visibility;
   renderApp();
-};
-
-var myBestSkill = function myBestSkill() {
-  var randomSkill = Math.floor(Math.random() * myProfile.skill.length);
-  var bestSkill = myProfile.skill[randomSkill];
-  alert(bestSkill);
 };
 
 var appRoot = document.getElementById('root');
@@ -38,53 +16,17 @@ var renderApp = function renderApp() {
     React.createElement(
       'h1',
       null,
-      myProfile.hello
-    ),
-    myProfile.name && React.createElement(
-      'p',
-      null,
-      myProfile.name
-    ),
-    React.createElement(
-      'p',
-      null,
-      myProfile.skill.length > 0 ? 'Here are your skills' : 'No skills'
-    ),
-    myProfile.skill && React.createElement(
-      'ol',
-      null,
-      myProfile.skill.map(function (item, index) {
-        return React.createElement(
-          'li',
-          { key: index },
-          item
-        );
-      })
+      'Visibility toggle'
     ),
     React.createElement(
       'button',
-      { disabled: myProfile.skill.length === 0, onClick: myBestSkill },
-      'What is my best skill?'
+      { onClick: onToggle },
+      visibility ? 'Hide details' : 'Show details'
     ),
-    React.createElement(
-      'button',
-      { onClick: onRemoveAll },
-      'Remove all skill'
-    ),
-    React.createElement(
+    visibility && React.createElement(
       'p',
       null,
-      ' '
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', { type: 'text', name: 'skill' }),
-      React.createElement(
-        'button',
-        null,
-        'Add skill'
-      )
+      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
     )
   );
 
