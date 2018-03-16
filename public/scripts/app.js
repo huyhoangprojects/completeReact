@@ -27,29 +27,17 @@ var Counter = function (_React$Component) {
   _createClass(Counter, [{
     key: 'handleAdd',
     value: function handleAdd() {
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count + 1
-        };
-      });
+      this.setState({ count: this.state.count + 1 });
     }
   }, {
     key: 'handleMinus',
     value: function handleMinus() {
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count - 1
-        };
-      });
+      this.setState({ count: this.state.count - 1 });
     }
   }, {
     key: 'handleReset',
     value: function handleReset() {
-      this.setState(function (prevState) {
-        return {
-          count: 0
-        };
-      });
+      this.setState({ count: 0 });
     }
   }, {
     key: 'render',
