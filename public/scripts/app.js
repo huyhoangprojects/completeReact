@@ -1,35 +1,126 @@
 'use strict';
 
-var visibility = false;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var onToggle = function onToggle() {
-  visibility = !visibility;
-  renderApp();
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_React$Component) {
+  _inherits(Header, _React$Component);
+
+  function Header() {
+    _classCallCheck(this, Header);
+
+    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+  }
+
+  _createClass(Header, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'h1',
+          null,
+          'Huy Hoang Phan'
+        ),
+        React.createElement(
+          'h2',
+          null,
+          'I\'m a Front-end developer.'
+        )
+      );
+    }
+  }]);
+
+  return Header;
+}(React.Component);
+
+var Action = function (_React$Component2) {
+  _inherits(Action, _React$Component2);
+
+  function Action() {
+    _classCallCheck(this, Action);
+
+    return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).apply(this, arguments));
+  }
+
+  _createClass(Action, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'button',
+          null,
+          'What is my best skill?'
+        )
+      );
+    }
+  }]);
+
+  return Action;
+}(React.Component);
+
+var Skills = function (_React$Component3) {
+  _inherits(Skills, _React$Component3);
+
+  function Skills() {
+    _classCallCheck(this, Skills);
+
+    return _possibleConstructorReturn(this, (Skills.__proto__ || Object.getPrototypeOf(Skills)).apply(this, arguments));
+  }
+
+  _createClass(Skills, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'My skills'
+      );
+    }
+  }]);
+
+  return Skills;
+}(React.Component);
+
+var AddSkill = function (_React$Component4) {
+  _inherits(AddSkill, _React$Component4);
+
+  function AddSkill() {
+    _classCallCheck(this, AddSkill);
+
+    return _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).apply(this, arguments));
+  }
+
+  _createClass(AddSkill, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        'Add skill'
+      );
+    }
+  }]);
+
+  return AddSkill;
+}(React.Component);
+
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(Header, null),
+  React.createElement(Action, null),
+  React.createElement(Skills, null),
+  React.createElement(AddSkill, null)
+);
 var appRoot = document.getElementById('root');
 
-var renderApp = function renderApp() {
-  var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: onToggle },
-      visibility ? 'Hide details' : 'Show details'
-    ),
-    visibility && React.createElement(
-      'p',
-      null,
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    )
-  );
-
-  ReactDOM.render(template, appRoot);
-};
-renderApp();
+ReactDOM.render(template, appRoot);
