@@ -20,6 +20,13 @@ const onRemoveAll = () => {
   myProfile.skill = [];
   renderApp();
 };
+
+const myBestSkill = () => {
+  const randomSkill = Math.floor(Math.random() * myProfile.skill.length);
+  const bestSkill = myProfile.skill[randomSkill];
+  alert(bestSkill);
+}
+
 const appRoot = document.getElementById('root');
 
 
@@ -37,7 +44,7 @@ const renderApp = () => {
           })}
         </ol>
       }
-      <button onClick={onRemoveAll}>Remove all skill</button>
+      <button disabled={myProfile.skill.length===0} onClick={myBestSkill}>What is my best skill?</button><button onClick={onRemoveAll}>Remove all skill</button>
       <p> </p>
       <form onSubmit={onFormSubmit}>
       <input type="text" name="skill" />

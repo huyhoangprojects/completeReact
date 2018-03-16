@@ -22,6 +22,13 @@ var onRemoveAll = function onRemoveAll() {
   myProfile.skill = [];
   renderApp();
 };
+
+var myBestSkill = function myBestSkill() {
+  var randomSkill = Math.floor(Math.random() * myProfile.skill.length);
+  var bestSkill = myProfile.skill[randomSkill];
+  alert(bestSkill);
+};
+
 var appRoot = document.getElementById('root');
 
 var renderApp = function renderApp() {
@@ -53,6 +60,11 @@ var renderApp = function renderApp() {
           item
         );
       })
+    ),
+    React.createElement(
+      'button',
+      { disabled: myProfile.skill.length === 0, onClick: myBestSkill },
+      'What is my best skill?'
     ),
     React.createElement(
       'button',
