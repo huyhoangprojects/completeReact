@@ -1,32 +1,26 @@
-class Counter extends React.Component {
+class Toggle extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleMinus = this.handleMinus.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-
-    this.state = {count: 0};
+    this.state =  {isVisible: false};
+    this.onToggle = this.onToggle.bind(this);
   }
-  handleAdd() {
-    this.setState({count: this.state.count + 1});
-  }
-  handleMinus() {
-    this.setState({count: this.state.count - 1});
-  }
-  handleReset() {
-    this.setState({count: 0});
+  onToggle() {
+    this.setState({isVisible: !this.state.isVisible});
   }
   render() {
     return (
       <div>
-        <h1>Count: {this.state.count}</h1>
-        <button onClick={this.handleAdd}>+1</button>
-        <button onClick={this.handleMinus}>-1</button>
-        <button onClick={this.handleReset}>Reset</button>
+        <h1>Visibility toggle</h1>
+        <button onClick={this.onToggle}>{this.state.isVisible ? 'Hide details' : 'Show details'}</button>
+        {
+          this.state.isVisible &&
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        }
       </div>
-    );
+    )
   }
 }
+
 const appRoot = document.getElementById('root');
-ReactDOM.render(<Counter />, appRoot);
+ReactDOM.render(<Toggle />, appRoot);

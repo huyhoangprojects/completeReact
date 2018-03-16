@@ -8,36 +8,23 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-  _inherits(Counter, _React$Component);
+var Toggle = function (_React$Component) {
+  _inherits(Toggle, _React$Component);
 
-  function Counter(props) {
-    _classCallCheck(this, Counter);
+  function Toggle(props) {
+    _classCallCheck(this, Toggle);
 
-    var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Toggle.__proto__ || Object.getPrototypeOf(Toggle)).call(this, props));
 
-    _this.handleAdd = _this.handleAdd.bind(_this);
-    _this.handleMinus = _this.handleMinus.bind(_this);
-    _this.handleReset = _this.handleReset.bind(_this);
-
-    _this.state = { count: 0 };
+    _this.state = { isVisible: false };
+    _this.onToggle = _this.onToggle.bind(_this);
     return _this;
   }
 
-  _createClass(Counter, [{
-    key: 'handleAdd',
-    value: function handleAdd() {
-      this.setState({ count: this.state.count + 1 });
-    }
-  }, {
-    key: 'handleMinus',
-    value: function handleMinus() {
-      this.setState({ count: this.state.count - 1 });
-    }
-  }, {
-    key: 'handleReset',
-    value: function handleReset() {
-      this.setState({ count: 0 });
+  _createClass(Toggle, [{
+    key: 'onToggle',
+    value: function onToggle() {
+      this.setState({ isVisible: !this.state.isVisible });
     }
   }, {
     key: 'render',
@@ -48,30 +35,24 @@ var Counter = function (_React$Component) {
         React.createElement(
           'h1',
           null,
-          'Count: ',
-          this.state.count
+          'Visibility toggle'
         ),
         React.createElement(
           'button',
-          { onClick: this.handleAdd },
-          '+1'
+          { onClick: this.onToggle },
+          this.state.isVisible ? 'Hide details' : 'Show details'
         ),
-        React.createElement(
-          'button',
-          { onClick: this.handleMinus },
-          '-1'
-        ),
-        React.createElement(
-          'button',
-          { onClick: this.handleReset },
-          'Reset'
+        this.state.isVisible && React.createElement(
+          'p',
+          null,
+          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
         )
       );
     }
   }]);
 
-  return Counter;
+  return Toggle;
 }(React.Component);
 
 var appRoot = document.getElementById('root');
-ReactDOM.render(React.createElement(Counter, null), appRoot);
+ReactDOM.render(React.createElement(Toggle, null), appRoot);
