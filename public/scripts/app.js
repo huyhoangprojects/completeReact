@@ -8,8 +8,39 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Header = function (_React$Component) {
-  _inherits(Header, _React$Component);
+var Profile = function (_React$Component) {
+  _inherits(Profile, _React$Component);
+
+  function Profile() {
+    _classCallCheck(this, Profile);
+
+    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+  }
+
+  _createClass(Profile, [{
+    key: 'render',
+    value: function render() {
+      var myProfile = {
+        name: 'Phan Huy Hoang',
+        job: "I'm a Front-end developer.",
+        skills: ['HTML', 'CSS', 'Javascript']
+      };
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(Header, { name: myProfile.name, job: myProfile.job }),
+        React.createElement(Action, null),
+        React.createElement(Skills, { skills: myProfile.skills }),
+        React.createElement(AddSkill, null)
+      );
+    }
+  }]);
+
+  return Profile;
+}(React.Component);
+
+var Header = function (_React$Component2) {
+  _inherits(Header, _React$Component2);
 
   function Header() {
     _classCallCheck(this, Header);
@@ -26,12 +57,12 @@ var Header = function (_React$Component) {
         React.createElement(
           'h1',
           null,
-          'Huy Hoang Phan'
+          this.props.name
         ),
         React.createElement(
           'h2',
           null,
-          'I\'m a Front-end developer.'
+          this.props.job
         )
       );
     }
@@ -40,8 +71,8 @@ var Header = function (_React$Component) {
   return Header;
 }(React.Component);
 
-var Action = function (_React$Component2) {
-  _inherits(Action, _React$Component2);
+var Action = function (_React$Component3) {
+  _inherits(Action, _React$Component3);
 
   function Action() {
     _classCallCheck(this, Action);
@@ -67,8 +98,8 @@ var Action = function (_React$Component2) {
   return Action;
 }(React.Component);
 
-var Skills = function (_React$Component3) {
-  _inherits(Skills, _React$Component3);
+var Skills = function (_React$Component4) {
+  _inherits(Skills, _React$Component4);
 
   function Skills() {
     _classCallCheck(this, Skills);
@@ -82,8 +113,13 @@ var Skills = function (_React$Component3) {
       return React.createElement(
         'div',
         null,
-        'My skills',
-        React.createElement(Skill, null)
+        React.createElement(
+          'ol',
+          null,
+          this.props.skills.map(function (skill, index) {
+            return React.createElement(Skill, { key: index, skillText: skill });
+          })
+        )
       );
     }
   }]);
@@ -91,8 +127,8 @@ var Skills = function (_React$Component3) {
   return Skills;
 }(React.Component);
 
-var Skill = function (_React$Component4) {
-  _inherits(Skill, _React$Component4);
+var Skill = function (_React$Component5) {
+  _inherits(Skill, _React$Component5);
 
   function Skill() {
     _classCallCheck(this, Skill);
@@ -104,9 +140,9 @@ var Skill = function (_React$Component4) {
     key: 'render',
     value: function render() {
       return React.createElement(
-        'div',
+        'li',
         null,
-        'skill'
+        this.props.skillText
       );
     }
   }]);
@@ -114,8 +150,8 @@ var Skill = function (_React$Component4) {
   return Skill;
 }(React.Component);
 
-var AddSkill = function (_React$Component5) {
-  _inherits(AddSkill, _React$Component5);
+var AddSkill = function (_React$Component6) {
+  _inherits(AddSkill, _React$Component6);
 
   function AddSkill() {
     _classCallCheck(this, AddSkill);
@@ -137,14 +173,6 @@ var AddSkill = function (_React$Component5) {
   return AddSkill;
 }(React.Component);
 
-var template = React.createElement(
-  'div',
-  null,
-  React.createElement(Header, null),
-  React.createElement(Action, null),
-  React.createElement(Skills, null),
-  React.createElement(AddSkill, null)
-);
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(React.createElement(Profile, null), appRoot);

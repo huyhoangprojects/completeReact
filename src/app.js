@@ -1,9 +1,28 @@
+class Profile extends React.Component {
+  render() {
+    const myProfile = {
+      name: 'Phan Huy Hoang',
+      job: "I'm a Front-end developer.",
+      skills: ['HTML', 'CSS', 'Javascript']
+    }
+    return (
+      <div>
+        <Header name={myProfile.name} job={myProfile.job}/>
+        <Action />
+        <Skills skills={myProfile.skills}/>
+        <AddSkill />
+      </div>
+    );
+  }
+}
+
+
 class Header extends React.Component {
   render() {
     return (
       <div>
-        <h1>Huy Hoang Phan</h1>
-        <h2>I'm a Front-end developer.</h2>
+        <h1>{this.props.name}</h1>
+        <h2>{this.props.job}</h2>
       </div>
     )
   }
@@ -23,8 +42,11 @@ class Skills extends React.Component {
   render() {
     return (
       <div>
-        My skills
-        <Skill />
+        <ol>
+          {
+            this.props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
+          }
+        </ol>
       </div>
     )
   }
@@ -33,9 +55,9 @@ class Skills extends React.Component {
 class Skill extends React.Component {
   render() {
     return (
-      <div>
-        skill
-      </div>
+      <li>
+        {this.props.skillText}
+      </li>
     )
   }
 }
@@ -50,14 +72,6 @@ class AddSkill extends React.Component {
   }
 }
 
-const template = (
-  <div>
-    <Header />
-    <Action />
-    <Skills />
-    <AddSkill />
-  </div>
-)
 const appRoot = document.getElementById('root');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(<Profile />, appRoot);
