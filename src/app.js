@@ -21,8 +21,13 @@ class Profile extends React.Component {
   }
 
   handleAdd(skill) {
+    if (!skill) {
+      return 'Enter the valid skill';
+    } else if (this.state.skills.indexOf(skill) != -1) {
+      return 'Skill is exist';
+    }
     this.setState({
-      skills: this.state.skills.concat(skill)
+      skills: [...this.state.skills, skill]
     });
   }
 
@@ -34,7 +39,6 @@ class Profile extends React.Component {
     return (
       <div>
         <Header name={myProfile.name} job={myProfile.job}/>
-        {console.log(this.state.skills)}
         <Action hasSkills={this.state.skills.length > 0} handlePick={this.handlePick}/>
         <Skills skills={this.state.skills} handleDelete={this.handleDelete}/>
         <AddSkill handleAdd={this.handleAdd} />
@@ -80,7 +84,6 @@ class Skills extends React.Component {
       <div>
         <button onClick={this.props.handleDelete}>Remove All</button>
         <ol>
-          {console.log('skills', this.props.skills)}
           {
             this.props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
           }
@@ -104,16 +107,17 @@ class AddSkill extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {error : null}
     this.handleAdd = this.handleAdd.bind(this);
   }
   handleAdd(e) {
     e.preventDefault();
-    const skill = e.target.elements.skill.value;
-
-    if(skill) {
-      this.props.handleAdd(skill);
+    const skill = e.target.elements.skill.value.trim();
+    const error = this.props.handleAdd(skill);
+    if(!error) {
       e.target.elements.skill.value = '';
     }
+    this.setState({ error });
   }
   render() {
     return (
@@ -122,6 +126,7 @@ class AddSkill extends React.Component {
           <input type="text" name="skill" />
           <button>Add skill</button>
         </form>
+        {this.state.error && <div>{this.state.error}</div>}
       </div>
     )
   }

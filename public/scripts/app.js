@@ -2,6 +2,8 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -40,8 +42,13 @@ var Profile = function (_React$Component) {
   }, {
     key: 'handleAdd',
     value: function handleAdd(skill) {
+      if (!skill) {
+        return 'Enter the valid skill';
+      } else if (this.state.skills.indexOf(skill) != -1) {
+        return 'Skill is exist';
+      }
       this.setState({
-        skills: this.state.skills.concat(skill)
+        skills: [].concat(_toConsumableArray(this.state.skills), [skill])
       });
     }
   }, {
@@ -55,7 +62,6 @@ var Profile = function (_React$Component) {
         'div',
         null,
         React.createElement(Header, { name: myProfile.name, job: myProfile.job }),
-        console.log(this.state.skills),
         React.createElement(Action, { hasSkills: this.state.skills.length > 0, handlePick: this.handlePick }),
         React.createElement(Skills, { skills: this.state.skills, handleDelete: this.handleDelete }),
         React.createElement(AddSkill, { handleAdd: this.handleAdd })
@@ -148,7 +154,6 @@ var Skills = function (_React$Component4) {
         React.createElement(
           'ol',
           null,
-          console.log('skills', this.props.skills),
           this.props.skills.map(function (skill, index) {
             return React.createElement(Skill, { key: index, skillText: skill });
           })
@@ -191,6 +196,7 @@ var AddSkill = function (_React$Component6) {
 
     var _this6 = _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).call(this, props));
 
+    _this6.state = { error: null };
     _this6.handleAdd = _this6.handleAdd.bind(_this6);
     return _this6;
   }
@@ -199,12 +205,12 @@ var AddSkill = function (_React$Component6) {
     key: 'handleAdd',
     value: function handleAdd(e) {
       e.preventDefault();
-      var skill = e.target.elements.skill.value;
-
-      if (skill) {
-        this.props.handleAdd(skill);
+      var skill = e.target.elements.skill.value.trim();
+      var error = this.props.handleAdd(skill);
+      if (!error) {
         e.target.elements.skill.value = '';
       }
+      this.setState({ error: error });
     }
   }, {
     key: 'render',
@@ -221,6 +227,11 @@ var AddSkill = function (_React$Component6) {
             null,
             'Add skill'
           )
+        ),
+        this.state.error && React.createElement(
+          'div',
+          null,
+          this.state.error
         )
       );
     }
