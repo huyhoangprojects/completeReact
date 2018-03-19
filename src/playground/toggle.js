@@ -1,115 +1,26 @@
-class Profile extends React.Component {
-  render() {
-    const myProfile = {
-      name: 'Phan Huy Hoang',
-      job: "I'm a Front-end developer.",
-      skills: ['HTML', 'CSS', 'Javascript']
-    }
-    return (
-      <div>
-        <Header name={myProfile.name} job={myProfile.job}/>
-        <Action />
-        <Skills skills={myProfile.skills}/>
-        <AddSkill />
-      </div>
-    );
-  }
-}
-
-
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.name}</h1>
-        <h2>{this.props.job}</h2>
-      </div>
-    )
-  }
-}
-
-class Action extends React.Component {
+class Toggle extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handlePick = this.handlePick.bind(this);
+    this.state =  {isVisible: false};
+    this.onToggle = this.onToggle.bind(this);
   }
-
-  handlePick() {
-    alert('Pick one!');
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.handlePick}>What is my best skill?</button>
-      </div>
-    )
-  }
-}
-
-class Skills extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleRemove = this.handleRemove.bind(this);
-  }
-
-  handleRemove() {
-    alert('Remove all!');
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleRemove}>Remove All</button>
-        <ol>
-          {
-            this.props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
-          }
-        </ol>
-      </div>
-    )
-  }
-}
-
-class Skill extends React.Component {
-  render() {
-    return (
-      <li>
-        {this.props.skillText}
-      </li>
-    )
-  }
-}
-
-class AddSkill extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleAdd = this.handleAdd.bind(this);
-  }
-  handleAdd(e) {
-    e.preventDefault();
-    const skill = e.target.elements.skill.value;
-
-    if(skill) {
-      alert(skill);
-      e.target.elements.skill.value = '';
-    }
+  onToggle() {
+    this.setState({isVisible: !this.state.isVisible});
   }
   render() {
     return (
       <div>
-        <form onSubmit={this.handleAdd}>
-          <input type="text" name="skill" />
-          <button>Add skill</button>
-        </form>
+        <h1>Visibility toggle</h1>
+        <button onClick={this.onToggle}>{this.state.isVisible ? 'Hide details' : 'Show details'}</button>
+        {
+          this.state.isVisible &&
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        }
       </div>
     )
   }
 }
 
 const appRoot = document.getElementById('root');
-
-ReactDOM.render(<Profile />, appRoot);
+ReactDOM.render(<Toggle />, appRoot);
