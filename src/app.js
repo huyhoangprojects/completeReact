@@ -48,59 +48,42 @@ class Profile extends React.Component {
 }
 
 
-class Header extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.name}</h1>
-        <h2>{this.props.job}</h2>
-      </div>
-    )
-  }
+const Header = (props) =>  {
+  return (
+    <div>
+      <h1>{props.name}</h1>
+      <h2>{props.job}</h2>
+    </div>
+  )
 }
 
-class Action extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
+const Action = (props) => {
     return (
       <div>
-        <button onClick={this.props.handlePick} disabled={!this.props.hasSkills}>What is my best skill?</button>
+        <button onClick={props.handlePick} disabled={!props.hasSkills}>What is my best skill?</button>
       </div>
     )
-  }
 }
 
-class Skills extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={this.props.handleDelete}>Remove All</button>
-        <ol>
-          {
-            this.props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
-          }
-        </ol>
-      </div>
-    )
-  }
+const Skills = (props) => {
+  return (
+    <div>
+      <button onClick={props.handleDelete}>Remove All</button>
+      <ol>
+        {
+          props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
+        }
+      </ol>
+    </div>
+  )
 }
 
-class Skill extends React.Component {
-  render() {
-    return (
-      <li>
-        {this.props.skillText}
-      </li>
-    )
-  }
+const Skill = (props) => {
+  return (
+    <li>
+      {props.skillText}
+    </li>
+  )
 }
 
 class AddSkill extends React.Component {

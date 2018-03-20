@@ -72,133 +72,73 @@ var Profile = function (_React$Component) {
   return Profile;
 }(React.Component);
 
-var Header = function (_React$Component2) {
-  _inherits(Header, _React$Component2);
+var Header = function Header(props) {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      props.name
+    ),
+    React.createElement(
+      'h2',
+      null,
+      props.job
+    )
+  );
+};
 
-  function Header() {
-    _classCallCheck(this, Header);
+var Action = function Action(props) {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'button',
+      { onClick: props.handlePick, disabled: !props.hasSkills },
+      'What is my best skill?'
+    )
+  );
+};
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
-  }
+var Skills = function Skills(props) {
+  return React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'button',
+      { onClick: props.handleDelete },
+      'Remove All'
+    ),
+    React.createElement(
+      'ol',
+      null,
+      props.skills.map(function (skill, index) {
+        return React.createElement(Skill, { key: index, skillText: skill });
+      })
+    )
+  );
+};
 
-  _createClass(Header, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'h1',
-          null,
-          this.props.name
-        ),
-        React.createElement(
-          'h2',
-          null,
-          this.props.job
-        )
-      );
-    }
-  }]);
+var Skill = function Skill(props) {
+  return React.createElement(
+    'li',
+    null,
+    props.skillText
+  );
+};
 
-  return Header;
-}(React.Component);
-
-var Action = function (_React$Component3) {
-  _inherits(Action, _React$Component3);
-
-  function Action(props) {
-    _classCallCheck(this, Action);
-
-    return _possibleConstructorReturn(this, (Action.__proto__ || Object.getPrototypeOf(Action)).call(this, props));
-  }
-
-  _createClass(Action, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'button',
-          { onClick: this.props.handlePick, disabled: !this.props.hasSkills },
-          'What is my best skill?'
-        )
-      );
-    }
-  }]);
-
-  return Action;
-}(React.Component);
-
-var Skills = function (_React$Component4) {
-  _inherits(Skills, _React$Component4);
-
-  function Skills(props) {
-    _classCallCheck(this, Skills);
-
-    return _possibleConstructorReturn(this, (Skills.__proto__ || Object.getPrototypeOf(Skills)).call(this, props));
-  }
-
-  _createClass(Skills, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'button',
-          { onClick: this.props.handleDelete },
-          'Remove All'
-        ),
-        React.createElement(
-          'ol',
-          null,
-          this.props.skills.map(function (skill, index) {
-            return React.createElement(Skill, { key: index, skillText: skill });
-          })
-        )
-      );
-    }
-  }]);
-
-  return Skills;
-}(React.Component);
-
-var Skill = function (_React$Component5) {
-  _inherits(Skill, _React$Component5);
-
-  function Skill() {
-    _classCallCheck(this, Skill);
-
-    return _possibleConstructorReturn(this, (Skill.__proto__ || Object.getPrototypeOf(Skill)).apply(this, arguments));
-  }
-
-  _createClass(Skill, [{
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'li',
-        null,
-        this.props.skillText
-      );
-    }
-  }]);
-
-  return Skill;
-}(React.Component);
-
-var AddSkill = function (_React$Component6) {
-  _inherits(AddSkill, _React$Component6);
+var AddSkill = function (_React$Component2) {
+  _inherits(AddSkill, _React$Component2);
 
   function AddSkill(props) {
     _classCallCheck(this, AddSkill);
 
-    var _this6 = _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, (AddSkill.__proto__ || Object.getPrototypeOf(AddSkill)).call(this, props));
 
-    _this6.state = { error: null };
-    _this6.handleAdd = _this6.handleAdd.bind(_this6);
-    return _this6;
+    _this2.state = { error: null };
+    _this2.handleAdd = _this2.handleAdd.bind(_this2);
+    return _this2;
   }
 
   _createClass(AddSkill, [{
