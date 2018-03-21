@@ -11,6 +11,19 @@ class Profile extends React.Component {
     this.handleAdd = this.handleAdd.bind(this);
   }
 
+  componentDidMount() {
+    console.log('fetching data');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevProps, prevState);
+    console.log('saving data');
+  }
+
+  componentWillUnmount() {
+    console.log('remove component');
+  }
+
   handleDelete() {
     this.setState({ skills: []});
   }

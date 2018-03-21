@@ -29,6 +29,22 @@ var Profile = function (_React$Component) {
   }
 
   _createClass(Profile, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('fetching data');
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log(prevProps, prevState);
+      console.log('saving data');
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log('remove component');
+    }
+  }, {
     key: 'handleDelete',
     value: function handleDelete() {
       this.setState({ skills: [] });
