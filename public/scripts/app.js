@@ -29,8 +29,9 @@ var Counter = function (_React$Component) {
     value: function componentDidMount() {
       try {
         var count = localStorage.getItem('count');
-        if (count !== null) {
-          this.setState({ count: parseInt(count) });
+        var myCount = parseInt(count);
+        if (!isNaN(myCount)) {
+          this.setState({ count: myCount });
         }
       } catch (error) {}
     }
