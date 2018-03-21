@@ -3,7 +3,7 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      skills: ['HTML', 'CSS', 'Javascript']
+      skills: this.props.skills //['HTML', 'CSS', 'Javascript']
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handlePick = this.handlePick.bind(this);
@@ -34,11 +34,11 @@ class Profile extends React.Component {
   render() {
     const myProfile = {
       name: 'Phan Huy Hoang',
-      job: "I'm a Front-end developer.",
+      job: "Front-end developer",
     }
     return (
       <div>
-        <Header name={myProfile.name} job={myProfile.job}/>
+        <Header job={myProfile.job}/>
         <Action hasSkills={this.state.skills.length > 0} handlePick={this.handlePick}/>
         <Skills skills={this.state.skills} handleDelete={this.handleDelete}/>
         <AddSkill handleAdd={this.handleAdd} />
@@ -47,14 +47,21 @@ class Profile extends React.Component {
   }
 }
 
+Profile.defaultProps = {
+  skills: []
+}
 
 const Header = (props) =>  {
   return (
     <div>
       <h1>{props.name}</h1>
-      <h2>{props.job}</h2>
+      {props.job && <h2>{`I'm a ${props.job}.`}</h2>}
     </div>
   )
+}
+
+Header.defaultProps = {
+  name: 'Huy Hoang Phan'
 }
 
 const Action = (props) => {
@@ -117,4 +124,4 @@ class AddSkill extends React.Component {
 
 const appRoot = document.getElementById('root');
 
-ReactDOM.render(<Profile />, appRoot);
+ReactDOM.render(<Profile skills={['HTML', 'CSS', 'Javascript']} />, appRoot);

@@ -19,7 +19,7 @@ var Profile = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 
     _this.state = {
-      skills: ['HTML', 'CSS', 'Javascript']
+      skills: _this.props.skills //['HTML', 'CSS', 'Javascript']
     };
     _this.handleDelete = _this.handleDelete.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
@@ -56,12 +56,12 @@ var Profile = function (_React$Component) {
     value: function render() {
       var myProfile = {
         name: 'Phan Huy Hoang',
-        job: "I'm a Front-end developer."
+        job: "Front-end developer"
       };
       return React.createElement(
         'div',
         null,
-        React.createElement(Header, { name: myProfile.name, job: myProfile.job }),
+        React.createElement(Header, { job: myProfile.job }),
         React.createElement(Action, { hasSkills: this.state.skills.length > 0, handlePick: this.handlePick }),
         React.createElement(Skills, { skills: this.state.skills, handleDelete: this.handleDelete }),
         React.createElement(AddSkill, { handleAdd: this.handleAdd })
@@ -72,6 +72,10 @@ var Profile = function (_React$Component) {
   return Profile;
 }(React.Component);
 
+Profile.defaultProps = {
+  skills: []
+};
+
 var Header = function Header(props) {
   return React.createElement(
     'div',
@@ -81,12 +85,16 @@ var Header = function Header(props) {
       null,
       props.name
     ),
-    React.createElement(
+    props.job && React.createElement(
       'h2',
       null,
-      props.job
+      'I\'m a ' + props.job + '.'
     )
   );
+};
+
+Header.defaultProps = {
+  name: 'Huy Hoang Phan'
 };
 
 var Action = function Action(props) {
@@ -182,4 +190,4 @@ var AddSkill = function (_React$Component2) {
 
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(React.createElement(Profile, null), appRoot);
+ReactDOM.render(React.createElement(Profile, { skills: ['HTML', 'CSS', 'Javascript'] }), appRoot);
