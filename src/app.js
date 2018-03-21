@@ -6,12 +6,19 @@ class Profile extends React.Component {
       skills: this.props.skills //['HTML', 'CSS', 'Javascript']
     }
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleDeleteSkill = this.handleDeleteSkill.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleDelete() {
     this.setState({ skills: []});
+  }
+
+  handleDeleteSkill(skillToDelete) {
+    this.setState({
+      skills: this.state.skills.filter((skill) => skill !== skillToDelete)
+    });
   }
 
   handlePick() {
@@ -40,7 +47,7 @@ class Profile extends React.Component {
       <div>
         <Header job={myProfile.job}/>
         <Action hasSkills={this.state.skills.length > 0} handlePick={this.handlePick}/>
-        <Skills skills={this.state.skills} handleDelete={this.handleDelete}/>
+        <Skills skills={this.state.skills} handleDelete={this.handleDelete} handleDeleteSkill={this.handleDeleteSkill}/>
         <AddSkill handleAdd={this.handleAdd} />
       </div>
     );
@@ -78,7 +85,7 @@ const Skills = (props) => {
       <button onClick={props.handleDelete}>Remove All</button>
       <ol>
         {
-          props.skills.map((skill, index)=> <Skill key={index} skillText={skill}/>)
+          props.skills.map((skill, index)=> <Skill key={index} skillText={skill} handleDeleteSkill={props.handleDeleteSkill} />)
         }
       </ol>
     </div>
@@ -89,6 +96,7 @@ const Skill = (props) => {
   return (
     <li>
       {props.skillText}
+      <button onClick={(e)=> {props.handleDeleteSkill(props.skillText)}}>x</button>
     </li>
   )
 }

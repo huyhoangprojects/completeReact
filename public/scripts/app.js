@@ -22,6 +22,7 @@ var Profile = function (_React$Component) {
       skills: _this.props.skills //['HTML', 'CSS', 'Javascript']
     };
     _this.handleDelete = _this.handleDelete.bind(_this);
+    _this.handleDeleteSkill = _this.handleDeleteSkill.bind(_this);
     _this.handlePick = _this.handlePick.bind(_this);
     _this.handleAdd = _this.handleAdd.bind(_this);
     return _this;
@@ -31,6 +32,15 @@ var Profile = function (_React$Component) {
     key: 'handleDelete',
     value: function handleDelete() {
       this.setState({ skills: [] });
+    }
+  }, {
+    key: 'handleDeleteSkill',
+    value: function handleDeleteSkill(skillToDelete) {
+      this.setState({
+        skills: this.state.skills.filter(function (skill) {
+          return skill !== skillToDelete;
+        })
+      });
     }
   }, {
     key: 'handlePick',
@@ -63,7 +73,7 @@ var Profile = function (_React$Component) {
         null,
         React.createElement(Header, { job: myProfile.job }),
         React.createElement(Action, { hasSkills: this.state.skills.length > 0, handlePick: this.handlePick }),
-        React.createElement(Skills, { skills: this.state.skills, handleDelete: this.handleDelete }),
+        React.createElement(Skills, { skills: this.state.skills, handleDelete: this.handleDelete, handleDeleteSkill: this.handleDeleteSkill }),
         React.createElement(AddSkill, { handleAdd: this.handleAdd })
       );
     }
@@ -122,7 +132,7 @@ var Skills = function Skills(props) {
       'ol',
       null,
       props.skills.map(function (skill, index) {
-        return React.createElement(Skill, { key: index, skillText: skill });
+        return React.createElement(Skill, { key: index, skillText: skill, handleDeleteSkill: props.handleDeleteSkill });
       })
     )
   );
@@ -132,7 +142,14 @@ var Skill = function Skill(props) {
   return React.createElement(
     'li',
     null,
-    props.skillText
+    props.skillText,
+    React.createElement(
+      'button',
+      { onClick: function onClick(e) {
+          props.handleDeleteSkill(props.skillText);
+        } },
+      'x'
+    )
   );
 };
 
