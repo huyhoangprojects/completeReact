@@ -12,12 +12,22 @@ class Profile extends React.Component {
   }
 
   componentDidMount() {
-    console.log('fetching data');
+    try {
+      const json = localStorage.getItem('skills');
+      const skills = JSON.parse(json);
+      if (skills) {
+        this.setState({skills});
+      }
+    } catch (error) {
+
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps, prevState);
-    console.log('saving data');
+    if(prevState.skills.length !== this.state.skills.length) {
+      const json = JSON.stringify(this.state.skills);
+      localStorage.setItem('skills', json);
+    }
   }
 
   componentWillUnmount() {
@@ -145,4 +155,4 @@ class AddSkill extends React.Component {
 
 const appRoot = document.getElementById('root');
 
-ReactDOM.render(<Profile skills={['HTML', 'CSS', 'Javascript']} />, appRoot);
+ReactDOM.render(<Profile />, appRoot);

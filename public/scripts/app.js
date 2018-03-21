@@ -31,13 +31,21 @@ var Profile = function (_React$Component) {
   _createClass(Profile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('fetching data');
+      try {
+        var json = localStorage.getItem('skills');
+        var skills = JSON.parse(json);
+        if (skills) {
+          this.setState({ skills: skills });
+        }
+      } catch (error) {}
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
-      console.log(prevProps, prevState);
-      console.log('saving data');
+      if (prevState.skills.length !== this.state.skills.length) {
+        var json = JSON.stringify(this.state.skills);
+        localStorage.setItem('skills', json);
+      }
     }
   }, {
     key: 'componentWillUnmount',
@@ -223,4 +231,4 @@ var AddSkill = function (_React$Component2) {
 
 var appRoot = document.getElementById('root');
 
-ReactDOM.render(React.createElement(Profile, { skills: ['HTML', 'CSS', 'Javascript'] }), appRoot);
+ReactDOM.render(React.createElement(Profile, null), appRoot);
