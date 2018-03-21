@@ -8,6 +8,8 @@ install:
 
 run:
 
+  • npm install (for first clones)
+
   • npm start
 
     - live-server public
