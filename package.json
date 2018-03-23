@@ -6,7 +6,7 @@
   "scripts": {
     "start-server": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch & live-server public",
     "start": "webpack --config webpack.config.js",
-    "build": "webpack --watch & live-server public"
+    "build": "webpack --watch | live-server public"
   },
   "repository": {
     "type": "git",
