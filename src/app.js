@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const template = React.createElement('p', {}, 'Testing v2');
+const template = <p>text v2</p>;
 
 ReactDOM.render(template, document.getElementById('root'));
