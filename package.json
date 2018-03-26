@@ -21,7 +21,8 @@
     "babel-preset-react": "^6.24.1",
     "live-server": "^1.2.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-modal": "^3.3.2"
   },
   "devDependencies": {
     "webpack": "^4.2.0",
