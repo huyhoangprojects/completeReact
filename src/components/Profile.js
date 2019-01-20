@@ -1,20 +1,23 @@
 import React from 'react';
 
-import AddSkill from './AddSkill'
-import Action from './Action'
-import Header from './Header'
-import Skills from './Skills'
+import AddSkill from './AddSkill';
+import Action from './Action';
+import Header from './Header';
+import Skills from './Skills';
+import OptionModal from './OptionModal';
 class Profile extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      skills: this.props.skills //['HTML', 'CSS', 'Javascript']
+      skills: this.props.skills, //['HTML', 'CSS', 'Javascript']
+      selectedOption: ''
     }
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteSkill = this.handleDeleteSkill.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleClearModal = this.handleClearModal.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +56,11 @@ class Profile extends React.Component {
   handlePick() {
     const randomNum = Math.floor(Math.random() * this.state.skills.length);
     const myPick = this.state.skills[randomNum];
-    alert(myPick);
+    this.setState({selectedOption: myPick});
+  }
+
+  handleClearModal() {
+    this.setState({selectedOption: ''});
   }
 
   handleAdd(skill) {
@@ -78,6 +85,7 @@ class Profile extends React.Component {
         <Action hasSkills={this.state.skills.length > 0} handlePick={this.handlePick}/>
         <Skills skills={this.state.skills} handleDelete={this.handleDelete} handleDeleteSkill={this.handleDeleteSkill}/>
         <AddSkill handleAdd={this.handleAdd} />
+        <OptionModal selectedOption={this.state.selectedOption} handleClearModal={this.handleClearModal} />
       </div>
     );
   }
